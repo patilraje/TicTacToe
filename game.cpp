@@ -3,6 +3,7 @@
 #include <iostream>
 #include <limits>
 #include <string>
+#include <sstream>
 
 /*
  * UNCOMMENT TO RUN UNIT TESTING
@@ -11,7 +12,10 @@
 
 using namespace std;
 
-
+string player1;
+string player2;
+char player1Symbol;
+char player2Symbol;
 char currentPlayer;
 int isWin = 0;
 int full=0; //to check if the board is full which would cause it to be a draw
@@ -21,6 +25,8 @@ void displayboard();
 bool isMoveValid(int row, int col);
 void makeMove(int row, int col, char player);
 int playGame(char player);
+int getInput(string prompt);
+bool validateInput(string input, int& value);
 void horizontal(char player);
 void vertical(char player);
 void diagonall(char player);
@@ -40,8 +46,6 @@ int main()
 	 */
 	//runTests();
 
-    string player1;
-    string player2;
     char playag = 'b';
     char choice;
 
@@ -50,7 +54,7 @@ int main()
     {
     	isWin = 0;
     	full = 0;
-        cout << "Welcome game players!" << endl;
+        cout << "Welcome players!" << endl;
         cout << "\nEnter Player 1 name: ";
         getline(cin, player1);
 
@@ -66,8 +70,8 @@ int main()
 		}
 
 		cin.ignore(); //clear the input buffer
-		char player1Symbol = choice; //player 1 chooses their symbol
-		char player2Symbol = (choice == 'X') ? 'O' : 'X';   //player 2 is assigned the alternate symbol
+		player1Symbol = choice; //player 1 chooses their symbol
+		player2Symbol = (choice == 'X') ? 'O' : 'X';   //player 2 is assigned the alternate symbol
 
 		cout << "\nEnter Player 2 name: ";
 		getline(cin, player2);
@@ -213,45 +217,78 @@ int playGame(char player)
 {
     int row, col;
 
-    cout << player << " please enter your desired row (1-3): ";
-    cin >> row;
+    //prompt for row input
+    row = getInput(((player == player1Symbol) ? player1 : player2) + " please enter your desired row (1-3): ");
 
-    //check if input is numeric
-    if (cin.fail())
-    {
-        cout << "Invalid input. Please enter numeric values only." << endl;
-        cin.clear(); // Clear error flags
-        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard invalid input
-        return playGame(player); // Retry getting input
-    }
+    //prompt for column input
+    col = getInput(((player == player1Symbol) ? player1 : player2) + " please enter your desired column (1-3): ");
 
-    cout << player << " please enter your desired column (1-3): ";
-    cin >> col;
-
-    //check if input is numeric
-    if (cin.fail())
-    {
-        cout << "Invalid input. Please enter numeric values only." << endl;
-        cin.clear(); // Clear error flags
-        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Discard invalid input
-        return playGame(player); // Retry getting input
-    }
-    //keep asking user to enter row column until it is valid
     while (!isMoveValid(row, col))
-    {
-        cout << player << " please enter your desired row (1-3): ";
-        cin >> row;
-        cout << player << " please enter your desired column (1-3): ";
-        cin >> col;
-    }
+	{
+    	row = getInput(((player == player1Symbol) ? player1 : player2) + " please enter your desired row (1-3): ");
+    	col = getInput(((player == player1Symbol) ? player1 : player2) + " please enter your desired column (1-3): ");
+	}
 
-       //switching here because in the main method it will swap
-    	//again so the player can continue with their second turn
-
+    //make the move
     makeMove(row, col, player);
 
     return 0;
 }
+
+
+
+//****************************************************************
+//function to validate input for row and column
+bool validateInput(string input, int& value)
+{
+    stringstream ss(input);
+    if (ss >> value)
+    {
+        //check if the value is within bounds (1 to 3)
+        if (value >= 1 && value <= 3)
+        {
+            //check if there are no extra characters after the number
+            char remaining;
+            if (ss >> remaining)
+            {
+                cout << "Invalid input. Please enter only a single numeric value." << endl;
+                return false;
+            }
+            return true;
+        }
+        else
+        {
+            cout << "Invalid input. Please enter a value between 1 and 3." << endl;
+            return false;
+        }
+    }
+    else
+    {
+        cout << "Invalid input. Please enter a numeric value." << endl;
+        return false;
+    }
+}
+
+
+
+//****************************************************************
+//function to get valid input for row and column
+int getInput(string prompt)
+{
+    string input;
+    int value;
+    while (true)
+    {
+        cout << prompt;
+        getline(cin, input);
+        if (validateInput(input, value))
+        {
+            break;
+        }
+    }
+    return value;
+}
+
 
 
 //****************************************************************
