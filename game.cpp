@@ -1,7 +1,9 @@
-#include <iostream>
-#include <iomanip>
-#include <string>
 #include <cctype>
+#include <iomanip>
+#include <iostream>
+#include <limits>
+#include <string>
+
 /*
  * UNCOMMENT TO RUN UNIT TESTING
  */
@@ -92,7 +94,7 @@ int main()
     		//winning condition
     		if (isWin) //if isWin is 1, enter the loop
     		{
-    			cout << ((currentPlayer == 'X') ? player1 : player2) << " is the winner." << endl;
+    			cout << ((currentPlayer == player1Symbol ) ? player1 : player2) << " is the winner." << endl;
     			break; // exit the loop when there's a winner
     		}
 
@@ -138,17 +140,33 @@ void initializegrid()
 //displays the state of the board
 void displayboard()
 {
+	cout << endl;
+	cout << "  1     2     3" << endl;
+	cout << endl;
     for (int i = 0; i < 3; i++)
     {
-        cout << "| ";
+    	cout << i + 1 << "  ";
         for (int j = 0; j < 3; j++)
         {
-            cout << board[i][j] << " | ";
+            cout << board[i][j] << " ";
+
+            if (j < 2)
+            {
+				cout << " | ";
+			}
         }
 
-        cout << endl << "---------------" << endl;
+        cout << endl;
+
+        if (i < 2)
+        {
+            cout << "   -------------" << endl;
+        }
     }
+
+    cout << endl;
 }
+
 
 
 //****************************************************************
@@ -354,24 +372,17 @@ void diagonalr(char player)
 //checks if the the board is full to declare a tie
 int isFull()
 {
-	int n=0;
+    for (int i = 0; i < 3; i++)
+    {
+        for (int j = 0; j < 3; j++)
+        {
+            if (board[i][j] == ' ')
+            {
+                return 0; //if any cell is empty, the board is not full
+            }
+        }
+    }
 
-	 for (int i = 0; i < 3; i++)
-	 {
-		 for (int j = 0; j < 3; j++)
-		 {
-			 if(board[i][j]!= ' ')
-			 {
-				 n++;
-			 }
-		 }
-	 }
-
-	 if(n== (3*3))
-	 {
-		 full=1;
-	 }
-
-	return 0;
+    full = 1; //if all cells are occupied, the board is full
+    return 0;
 }
-
