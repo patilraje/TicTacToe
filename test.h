@@ -3,7 +3,7 @@
 #ifndef TEST_H
 #define TEST_H
 
-// Function declarations for tests
+//function declarations for tests
 void testInitializeGrid();
 void testIsMoveValid();
 void testHorizontal();

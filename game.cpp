@@ -21,12 +21,18 @@ void vertical(char player);
 void diagonall(char player);
 void diagonalr(char player);
 int isFull();
-void runTests();
+/*
+ * UNCOMMENT TO RUN UNIT TESTING
+ */
+//void runTests();
 
 
 int main()
 {
 
+	/*
+	 * UNCOMMENT TO RUN UNIT TESTING
+	 */
 	//runTests();
 
     string player1;
@@ -38,6 +44,7 @@ int main()
     while (playag != 'q')
     {
     	isWin = 0;
+    	full = 0;
         cout << "Welcome game players!" << endl;
         cout << "\nEnter Player 1 name: ";
         getline(cin, player1);
@@ -90,7 +97,7 @@ int main()
     		//draw condition for when the board is full
     		else if (full)
     		{
-    			cout << "It's a draw.";  //if board is full it is a draw
+    			cout << "It's a draw." <<endl;  //if board is full it is a draw
     			break;
     		}
 

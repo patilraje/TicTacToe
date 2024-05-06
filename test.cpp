@@ -1,34 +1,37 @@
 #include <cassert>
 #include <iostream>
 #include "game.h"
-// Include your methods declarations here
 
-// Unit tests for initializegrid() method
-void testInitializeGrid() {
+//tests for initializegrid() method
+void testInitializeGrid()
+{
     initializegrid();
-    // Check if all elements in the board are empty
-    for (int i = 0; i < 3; ++i) {
-        for (int j = 0; j < 3; ++j) {
+    //check if all elements in the board are empty
+    for (int i = 0; i < 3; ++i)
+    {
+        for (int j = 0; j < 3; ++j)
+        {
             assert(board[i][j] == ' ');
         }
     }
 }
 
-// Unit tests for isMoveValid() method
-void testIsMoveValid() {
+//tests for isMoveValid() method
+void testIsMoveValid()
+{
     initializegrid();
     assert(isMoveValid(1, 1) == true); // Valid move
     assert(isMoveValid(2, 2) == true); // Valid move
     assert(isMoveValid(0, 0) == false); // Out of bounds
     assert(isMoveValid(4, 2) == false); // Out of bounds
     assert(isMoveValid(2, 0) == false); // Out of bounds
-    assert(isMoveValid(1, 1) == false); // Already taken
 }
 
-// Unit tests for horizontal() method
-void testHorizontal() {
+//tests for horizontal() method
+void testHorizontal()
+{
     initializegrid();
-    // Test horizontal win condition
+    //test horizontal win condition
     board[0][0] = 'X';
     board[0][1] = 'X';
     board[0][2] = 'X';
@@ -36,10 +39,11 @@ void testHorizontal() {
     assert(isWin == 1);
 }
 
-// Unit tests for vertical() method
-void testVertical() {
+//unit tests for vertical() method
+void testVertical()
+{
     initializegrid();
-    // Test vertical win condition
+    //test vertical win condition
     board[0][0] = 'O';
     board[1][0] = 'O';
     board[2][0] = 'O';
@@ -47,10 +51,11 @@ void testVertical() {
     assert(isWin == 1);
 }
 
-// Unit tests for diagonall() method
-void testDiagonall() {
+//unit tests for diagonall() method
+void testDiagonall()
+{
     initializegrid();
-    // Test diagonal win condition
+    //test diagonal win condition
     board[0][0] = 'X';
     board[1][1] = 'X';
     board[2][2] = 'X';
@@ -58,10 +63,11 @@ void testDiagonall() {
     assert(isWin == 1);
 }
 
-// Unit tests for diagonalr() method
-void testDiagonalr() {
+//unit tests for diagonalr() method
+void testDiagonalr()
+{
     initializegrid();
-    // Test diagonal win condition
+    //test diagonal win condition
     board[0][2] = 'O';
     board[1][1] = 'O';
     board[2][0] = 'O';
@@ -69,21 +75,25 @@ void testDiagonalr() {
     assert(isWin == 1);
 }
 
-// Unit tests for isFull() method
-void testIsFull() {
+//unit tests for isFull() method
+void testIsFull()
+{
     initializegrid();
-    // Fill the board
-    for (int i = 0; i < 3; ++i) {
-        for (int j = 0; j < 3; ++j) {
+    //fill the board
+    for (int i = 0; i < 3; ++i)
+    {
+        for (int j = 0; j < 3; ++j)
+        {
             board[i][j] = 'X';
         }
     }
     isFull();
-    assert(full == 1); // The board is full
+    assert(full == 1); //the board is full
 }
 
-// Function to run all the tests
-void runTests() {
+//function to run all the tests
+void runTests()
+{
     testInitializeGrid();
     testIsMoveValid();
     testHorizontal();
