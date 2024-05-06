@@ -3,16 +3,17 @@
 
 Instructions on How to Run the Game:
 
-Install the game.cpp file, save it, build it and run it and you’re good to go.
+Install the game.cpp file, save it, build it and run it. After completing these steps you’re good to go.
 
-Important: game.cpp can run as a standalone file, all other files are in case you want to perform unit testing, the cases are specified and testing has passed on my end.
+Important: The game.cpp can run as a standalone file. All other files are provided in case you want to perform unit testing. The test cases are specified, and testing has passed on my end.
 
-Machine: Build and run on MacOS.
-Toolchains: MacOSX GCC
+Program details:
+Developed and tested on MacOS. Toolchains used: MacOSX GCC
 
 Run time: Constant O(1)
 
-The following game has been ran on VS code on windows and also an online compiler to verify platform compatibility.
+Compatibility testing: The game has been run on VS Code on Windows and also on an online
+compiler to verify platform compatibility.
 
 1. Begin by initiating the game. It is designed for two players.
 2. The first player will register by entering their name when prompted.
@@ -25,7 +26,7 @@ The following game has been ran on VS code on windows and also an online compile
 9. Each player takes turns making moves until one player achieves victory or the game ends in a draw.
 10. Players must ensure fair play throughout the game by selecting only available blocks on the grid. If a block is already occupied, it is not a valid move.
 11. Enjoy the game and may the best strategist win!
-
-
+    
 Unit Testing
 Unit testing has been conducted and has passed all test cases, the commands for unit testing have been commented out so game.cpp can run as a stand alone program, but if you were to run unit testing, you must download the test.h, test.cpp and game.h.
+ 
