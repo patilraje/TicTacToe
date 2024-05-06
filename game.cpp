@@ -2,7 +2,10 @@
 #include <iomanip>
 #include <string>
 #include <cctype>
-#include "test.h"
+/*
+ * UNCOMMENT TO RUN UNIT TESTING
+ */
+//#include "test.h"
 
 using namespace std;
 
